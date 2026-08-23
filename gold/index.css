@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+::selection {
+  background: #541bff;
+  color: #cedb26;
+}
+
+@theme {
+  --color-champagne: #fff4d6;
+  --color-white: #ffffff;
+
+  --color-gold-light: #f6d878;
+  --color-gold: #d4af37;
+
+  --color-teal: #159a9c;
+
+  --color-purple: #241633;
+  --color-purple-deep: #160d21;
+
+  --color-ink: #17131a;
+  --color-muted: #6f6875;
+  --color-border: #e8dfcf;
+
+  --font-basic: "Basic", sans-serif;
+  --font-quicksand: "Quicksand", sans-serif;
+  --font-borel: "Borel", cursive;
+}
