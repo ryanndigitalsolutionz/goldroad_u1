@@ -70,3 +70,9 @@ To keep final buyer checkout prices competitive against local market rates:
 1. **Mandatory HS Classification**: Automated mapping of seller items to specific sub-tier HS codes to prevent destination customs from assigning fallback peak tariff rates.
 2. **Trade Agreement Routing**: Utilize regional economic trade preferences (e.g., AfCFTA tariff concessions for intra-African lanes) to qualify orders for reduced or zero-rated import duties.
 3. **De Minimis Engine**: Detect destination country threshold rules during cart building to advise buyers on optimal order splitting when applicable.
+
+To protect margin for dropshippers and reduce the final order price for buyers:
+
+1. **AfCFTA Preferential Duty Calculation**: Dynamic origin verification to apply preferential zero-tariff rates on qualifying intra-regional trades.
+2. **Order Splitting Engine**: Automated cart recommendations to keep individual dropship packages under destination *de minimis* duty thresholds.
+3. **Local Currency Payment Rails**: Integration with local settlement systems (PAPSS/Paystack/PayPal) to eliminate currency conversion markups at checkout.
