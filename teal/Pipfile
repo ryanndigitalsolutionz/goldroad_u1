@@ -13,6 +13,8 @@ flask-bcrypt = "*"
 flask-cors = "*"
 python-dotenv = "*"
 flask = "*"
+flask-migrate = "*"
+requests = "*"
 
 [dev-packages]
 

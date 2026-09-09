@@ -1,6 +1,90 @@
+// FreelancerHome.jsx
+
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FiSearch } from 'react-icons/fi'
 
 function FreelancerHome() {
+  const [projects, setProjects] = useState([])
+  const [proposals, setProposals] = useState([])
+  const [users, setUsers] = useState([])
+
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        setLoading(true)
+        setError('')
+
+        const [projectsResponse, proposalsResponse, usersResponse] =
+          await Promise.all([
+            fetch('http://127.0.0.1:5000/projects', {
+              credentials: 'include',
+            }),
+
+            fetch('http://127.0.0.1:5000/proposals', {
+              credentials: 'include',
+            }),
+
+            fetch('http://127.0.0.1:5000/users', {
+              credentials: 'include',
+            }),
+          ])
+
+        if (!projectsResponse.ok) {
+          throw new Error('Failed to load projects.')
+        }
+
+        if (!proposalsResponse.ok) {
+          throw new Error('Failed to load proposals.')
+        }
+
+        if (!usersResponse.ok) {
+          throw new Error('Failed to load users.')
+        }
+
+        const projectsData = await projectsResponse.json()
+        const proposalsData = await proposalsResponse.json()
+        const usersData = await usersResponse.json()
+
+        setProjects(
+          Array.isArray(projectsData)
+            ? projectsData
+            : []
+        )
+
+        setProposals(
+          Array.isArray(proposalsData)
+            ? proposalsData
+            : []
+        )
+
+        setUsers(
+          Array.isArray(usersData)
+            ? usersData
+            : []
+        )
+      } catch (error) {
+        console.error('Freelancer dashboard error:', error)
+        setError(
+          error.message || 'Could not load dashboard data.'
+        )
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchDashboardData()
+  }, [])
+
+  const projectCount = projects.length
+  const proposalCount = proposals.length
+
+  const recentProjects = projects.slice(0, 3)
+  const recentProposals = proposals.slice(0, 5)
+
   return (
     <main className="min-h-screen bg-champagne">
       <div className="mx-auto max-w-7xl px-6 py-10">
@@ -38,37 +122,54 @@ function FreelancerHome() {
           </div>
         </section>
 
+        {/* Error */}
+        {error && (
+          <div className="
+            mb-8 rounded-xl
+            border border-red-300
+            bg-red-50
+            px-5 py-4
+            font-quicksand text-sm
+            text-red-700
+          ">
+            {error}
+          </div>
+        )}
+
         {/* Stats */}
         <section className="mb-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
+          {/* Available Projects */}
           <div className="rounded-2xl border border-gold/20 bg-white p-6 shadow-sm">
             <p className="font-quicksand text-sm font-semibold text-muted">
-              Active Projects
+              Available Projects
             </p>
 
             <p className="mt-3 font-basic text-4xl font-bold text-purple">
-              0
+              {loading ? '...' : projectCount}
             </p>
 
             <p className="mt-2 font-quicksand text-sm text-muted">
-              Projects you're working on
+              Projects currently listed
             </p>
           </div>
 
+          {/* Proposals */}
           <div className="rounded-2xl border border-gold/20 bg-white p-6 shadow-sm">
             <p className="font-quicksand text-sm font-semibold text-muted">
               Proposals
             </p>
 
             <p className="mt-3 font-basic text-4xl font-bold text-purple">
-              0
+              {loading ? '...' : proposalCount}
             </p>
 
             <p className="mt-2 font-quicksand text-sm text-muted">
-              Proposals submitted
+              Proposals in the system
             </p>
           </div>
 
+          {/* Earnings */}
           <div className="rounded-2xl border border-gold/20 bg-white p-6 shadow-sm">
             <p className="font-quicksand text-sm font-semibold text-muted">
               Earnings
@@ -79,10 +180,11 @@ function FreelancerHome() {
             </p>
 
             <p className="mt-2 font-quicksand text-sm text-muted">
-              Total earnings
+              Earnings tracking not available yet
             </p>
           </div>
 
+          {/* Profile Views */}
           <div className="rounded-2xl border border-gold/20 bg-white p-6 shadow-sm">
             <p className="font-quicksand text-sm font-semibold text-muted">
               Profile Views
@@ -93,7 +195,7 @@ function FreelancerHome() {
             </p>
 
             <p className="mt-2 font-quicksand text-sm text-muted">
-              Views this month
+              Profile view tracking not available yet
             </p>
           </div>
 
@@ -129,40 +231,106 @@ function FreelancerHome() {
             </div>
 
             <div className="rounded-2xl border border-gold/20 bg-white p-8 shadow-sm">
-              <div className="flex min-h-64 flex-col items-center justify-center text-center">
 
-                {/* Framed icon */}
-                <div className="
-                  flex h-16 w-16 items-center justify-center
-                  rounded-2xl
-                  border border-gold/30
-                  bg-champagne
-                  text-xl text-purple
-                ">
-                  🔎
+              {loading ? (
+                <div className="flex min-h-64 items-center justify-center">
+                  <p className="font-quicksand text-muted">
+                    Loading projects...
+                  </p>
                 </div>
+              ) : recentProjects.length === 0 ? (
+                <div className="flex min-h-64 flex-col items-center justify-center text-center">
 
-                <h3 className="mt-5 font-basic text-xl font-bold text-purple">
-                  No recommendations yet
-                </h3>
+                  <div className="
+                    flex h-16 w-16 items-center justify-center
+                    rounded-2xl
+                    border border-gold/30
+                    bg-champagne
+                    text-2xl text-purple
+                  ">
+                    <FiSearch />
+                  </div>
 
-                <p className="mt-3 max-w-md font-quicksand leading-7 text-muted">
-                  Complete your profile and explore available projects
-                  to start discovering opportunities.
-                </p>
+                  <h3 className="mt-5 font-basic text-xl font-bold text-purple">
+                    No projects available
+                  </h3>
 
-                <Link
-                  to="/freelancer/projects"
-                  className="
-                    mt-6 rounded-xl bg-gold px-6 py-3
-                    font-quicksand text-sm font-bold text-purple
-                    transition hover:bg-gold/90 hover:shadow-md
-                  "
-                >
-                  Explore Projects
-                </Link>
+                  <p className="mt-3 max-w-md font-quicksand leading-7 text-muted">
+                    There are currently no projects available.
+                    Check back later for new opportunities.
+                  </p>
 
-              </div>
+                  <Link
+                    to="/freelancer/projects"
+                    className="
+                      mt-6 rounded-xl bg-gold px-6 py-3
+                      font-quicksand text-sm font-bold text-purple
+                      transition hover:bg-gold/90 hover:shadow-md
+                    "
+                  >
+                    Explore Projects
+                  </Link>
+
+                </div>
+              ) : (
+                <div className="space-y-4">
+
+                  {recentProjects.map((project) => (
+                    <Link
+                      key={project.id}
+                      to={`/freelancer/projects/${project.id}`}
+                      className="
+                        block rounded-xl
+                        border border-gold/20
+                        bg-champagne
+                        p-5
+                        transition
+                        hover:border-gold/50
+                        hover:shadow-md
+                      "
+                    >
+                      <div className="flex items-start justify-between gap-4">
+
+                        <div>
+                          <h3 className="font-basic text-lg font-bold text-purple">
+                            {project.title || 'Untitled Project'}
+                          </h3>
+
+                          <p className="mt-2 line-clamp-2 font-quicksand text-sm leading-6 text-muted">
+                            {project.description ||
+                              'No project description available.'}
+                          </p>
+                        </div>
+
+                        {project.budget !== undefined &&
+                          project.budget !== null && (
+                            <span className="
+                              whitespace-nowrap
+                              rounded-lg
+                              bg-gold/20
+                              px-3 py-2
+                              font-quicksand
+                              text-sm
+                              font-bold
+                              text-purple
+                            ">
+                              KSh {project.budget}
+                            </span>
+                          )}
+
+                      </div>
+
+                      {project.category && (
+                        <p className="mt-4 font-quicksand text-xs font-semibold text-purple">
+                          {project.category}
+                        </p>
+                      )}
+                    </Link>
+                  ))}
+
+                </div>
+              )}
+
             </div>
           </div>
 
@@ -270,11 +438,67 @@ function FreelancerHome() {
           </div>
 
           <div className="rounded-2xl border border-gold/20 bg-white p-8 shadow-sm">
-            <div className="flex min-h-32 items-center justify-center text-center">
-              <p className="font-quicksand text-muted">
-                Your proposal activity will appear here.
-              </p>
-            </div>
+
+            {loading ? (
+              <div className="flex min-h-32 items-center justify-center">
+                <p className="font-quicksand text-muted">
+                  Loading proposals...
+                </p>
+              </div>
+            ) : recentProposals.length === 0 ? (
+              <div className="flex min-h-32 items-center justify-center text-center">
+                <p className="font-quicksand text-muted">
+                  You haven't submitted any proposals yet.
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+
+                {recentProposals.map((proposal) => (
+                  <div
+                    key={proposal.id}
+                    className="
+                      rounded-xl
+                      border border-gold/20
+                      bg-champagne
+                      p-5
+                    "
+                  >
+                    <div className="flex items-center justify-between gap-4">
+
+                      <div>
+                        <p className="font-basic font-bold text-purple">
+                          Proposal #{proposal.id}
+                        </p>
+
+                        {proposal.project_id && (
+                          <p className="mt-1 font-quicksand text-sm text-muted">
+                            Project #{proposal.project_id}
+                          </p>
+                        )}
+                      </div>
+
+                      {proposal.status && (
+                        <span className="
+                          rounded-lg
+                          bg-gold/20
+                          px-3 py-2
+                          font-quicksand
+                          text-xs
+                          font-bold
+                          text-purple
+                        ">
+                          {proposal.status}
+                        </span>
+                      )}
+
+                    </div>
+                  </div>
+                ))}
+
+              </div>
+            )}
+
           </div>
 
         </section>

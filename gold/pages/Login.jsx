@@ -1,4 +1,3 @@
-// Login.jsx
 import { useSearchParams, useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react'
 
@@ -10,14 +9,42 @@ function Login() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
+    setError('')
 
-    if (role === 'freelancer') {
-      navigate('/freelancer')
-    } else {
-      navigate('/client')
+    try {
+      const response = await fetch(
+        'http://127.0.0.1:5000/auth/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        }
+      )
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setError(data.error || 'Login failed.')
+        return
+      }
+
+      if (role === 'freelancer') {
+        navigate('/freelancer')
+      } else {
+        navigate('/client')
+      }
+    } catch (error) {
+      setError('Could not connect to the server.')
     }
   }
 
@@ -200,6 +227,15 @@ function Login() {
           color: #541bff;
         }
 
+        .login-error {
+          margin: -10px 0 0;
+          font-family: 'Quicksand', sans-serif;
+          font-size: 14px;
+          font-weight: 600;
+          text-align: center;
+          color: #dc2626;
+        }
+
         @media (max-width: 600px) {
           .login-page {
             padding: 40px 20px;
@@ -223,6 +259,7 @@ function Login() {
 
       <main className="login-page">
         <section className="login-content">
+
           <div className="login-logo">
             <span>GR</span>
           </div>
@@ -285,6 +322,12 @@ function Login() {
               />
             </div>
 
+            {error && (
+              <p className="login-error">
+                {error}
+              </p>
+            )}
+
             <button
               className="login-button"
               type="submit"
@@ -306,6 +349,7 @@ function Login() {
           <p className="login-note">
             Your work. Your market. Your GoldRoad.
           </p>
+
         </section>
       </main>
     </>

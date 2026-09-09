@@ -1,4 +1,3 @@
-// Register.jsx
 import { useState } from 'react'
 import { useSearchParams, useNavigate, Link } from 'react-router-dom'
 
@@ -19,7 +18,7 @@ function Register() {
       ? 'Freelancer'
       : 'Client'
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     setError('')
 
@@ -28,7 +27,58 @@ function Register() {
       return
     }
 
-    navigate(`/login?role=${role}`)
+    const nameParts = name.trim().split(/\s+/)
+
+    const firstName = nameParts[0]
+    const lastName = nameParts.slice(1).join(' ')
+
+    if (!lastName) {
+      setError('Please enter your full name.')
+      return
+    }
+
+    try {
+      const response = await fetch(
+        'http://127.0.0.1:5000/auth/register',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            first_name: firstName,
+            last_name: lastName,
+            role: role,
+            email: email,
+            password: password,
+            confirm_password: confirmPassword,
+          }),
+        }
+      )
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        if (data.errors) {
+          const firstError = Object.values(data.errors)[0]
+
+          setError(
+            Array.isArray(firstError)
+              ? firstError[0]
+              : 'Registration failed.'
+          )
+        } else {
+          setError(data.error || 'Registration failed.')
+        }
+
+        return
+      }
+
+      navigate(`/login?role=${role}`)
+    } catch (error) {
+      setError('Could not connect to the server.')
+    }
   }
 
   return (

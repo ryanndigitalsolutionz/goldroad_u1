@@ -1,4 +1,3 @@
-// FreelancerProfile.jsx
 import { Link } from 'react-router-dom'
 
 function FreelancerProfile() {
@@ -37,21 +36,10 @@ function FreelancerProfile() {
 
           {/* Cover */}
           <div className="
-            relative
-            h-25
-            bg-purple
+            h-10
+            bg-gold
             md:h-42
           ">
-            <div className="
-              absolute
-              bottom-5 left-6
-              font-borel
-              text-lg
-              text-white/70
-              md:left-10
-            ">
-              GoldRoad Profile
-            </div>
           </div>
 
           <div className="px-8 pb-12 md:px-10">
