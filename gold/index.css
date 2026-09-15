@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-::selection {
-  background: #541bff;
-  color: #cedb26;
-}
-
 @theme {
   --color-champagne: #fff4d6;
   --color-white: #ffffff;
@@ -24,4 +19,81 @@
   --font-basic: "Basic", sans-serif;
   --font-quicksand: "Quicksand", sans-serif;
   --font-borel: "Borel", cursive;
+}
+
+:root {
+  font-family: "Quicksand", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  --purple: #4821eb;
+  --teal: #38de96;
+  --gold: #e8ad2d;
+  --yellow: #fff53b;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+html {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+  background: #160d21;
+}
+
+body {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: #160d21;
+  color: #ffffff;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(56, 222, 150, 0.5);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: #541bff;
+  color: #cedb26;
+}
+
+.theme-changing,
+.theme-changing body,
+.theme-changing #root {
+  transition:
+    background-color 650ms ease,
+    color 650ms ease;
 }

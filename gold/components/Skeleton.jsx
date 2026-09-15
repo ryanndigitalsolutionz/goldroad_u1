@@ -1,16 +1,11 @@
-function Skeleton({
+export default function Skeleton({
+  variant = 'text',
   className = '',
 }) {
   return (
-    <div
-      className={`
-        animate-pulse
-        rounded-xl
-        bg-purple/10
-        ${className}
-      `}
+    <span
+      aria-hidden="true"
+      className={`goldroad-skeleton goldroad-skeleton-${variant} ${className}`}
     />
   )
 }
-
-export default Skeleton

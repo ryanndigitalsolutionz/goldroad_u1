@@ -10,14 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RoleSelectionRouteImport } from './routes/role-selection'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 })
+const RoleSelectionRoute = RoleSelectionRouteImport.update({
+  id: '/role-selection',
+  path: '/role-selection',
+  getParentRoute: () => rootRouteImport,
+})
 
 const rootRouteChildren = {
   IndexRoute: IndexRoute,
+  RoleSelectionRoute: RoleSelectionRoute,
 }
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)

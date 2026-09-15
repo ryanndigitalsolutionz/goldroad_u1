@@ -1,9 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
+import Welcome from '../features/authentication/Welcome'
 
 export const Route = createFileRoute('/')({
-  component: Home,
+  component: Welcome,
 })
 
-function Home() {
-  return <h1>GoldRoad U1</h1>
-}
