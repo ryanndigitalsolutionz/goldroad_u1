@@ -1,37 +1,692 @@
-# GoldRoad U1 Ultimate FAQ
+# GoldRoad U1 Frontend
 
-## What IS  GoldRoad U1?
+GoldRoad U1 is a freelancing and advertising platform.
 
-GoldRoad U1 is a remote SaaS platform dedicated to solve other businesses problems in this digital era. This platform handles GoldRoad U1 handles freelancing, principal reselling agent and advertising of products and services.
-For any guest or client, beginner, entrepreneur, businessperson or company/organization, GoldRoad U1 offers you access to skilled personnel, latest products and quality services with fairer pricing and state-of-the-art customer support. Fortune knocks once at every man's door? GoldRoad U1 shows opportunity to every user's door! You have something commercially valuable to offer. GoldRoad U1 helps create the connection/journey needed to move that value toward the person or market that wants it.
-GoldRoad U1: The quality platform worth investing in!
+The current development phase focuses on building the main frontend structure and the first Client and Freelancer experiences.
 
-## Who is GoldRoad U1 FOR?
+---
 
-GoldRoad U1 is originally made to serve both clients and businesspeople.
-Clients can browse the marketplace for products and services, check their pricing and location in order to checkout.
-Companies that offer products will have to fill in a commuting agreement to ensure proper and fair taxing and pricing. The agreement and taxation is in my README.
+## Current Team
 
-## How is GoldRoad U1 structured and grounded?
+### Ryan
 
-Now:
+Responsible for:
 
-1. (a.) There are normal/common and rare categories of emojis in O.M.L.I, the RARE emojis/meme GIFs are what will be priced at 5 P-n @ (Five Pin-points EACH).
-    (b.) Freemium Host Controls are priced at 500 P-n @ (per meeting). Normally letting other attendants, talk and record themselves via microphone and camera is free, but doing it to others as a host plus features like transcribing, recording, banning, suspending, splitting breakout rooms, data boost mode and Sage-Guide Survey are paid either via those Pin-points or U1 Superb and the higher premium plans.
-2. (a.) What I meant by PDF Sheet was actually "File Spreadsheet". For Sage-Guide, having a PDF, SVG, JPEG or PNG form of the spreadsheet in Sage-Guide's Workplace (I need to find a way to make a spreadsheet extension in GoldRoad U1, so that people can make spreadsheets and Sage-Guide can generate organized tables and export them to that spreadsheet page so that the user can see it in the spreadsheet page) requires 30 P-n @.
-    (b.) Image Posters are just images of billboards Sage-Guide can help you generate. If you describe your brand or already have it's spreadsheet(it's better if you described your brand), then Sage-Guide can generate a simple image with your description. But after 3 trials, it'll deduct 45 P-n @. If a beginner/guest spent $1 every day for just a month(30 days), on Pin-points, that's 195 P-n! But for the first 3 months of your account staying signed in; after 3 trials of making an image poster, Sage-Guide will deduct 12 P-n @ for those first 3 months, then it will adapt to 45 P-n @ image. Same case goes for video generation, but until I decide to integrate Higgsfield API here, I won't give Sage-Guide a video generation feature right before launch.
-    (c.) Although, Sage-Guide will raise these these token limits based on U1 Superb, U1 Bulk and U1 V.I.P (video generation will be available on Bulk and V.I.P).
-3. (a.) About Freelancing, it works more like Upwork and Gumroad.
-    (b.) Poster Image is just saying that... posting an image to popup on everybody else's homepage/ad gallery and that costs 90 P-n if you don't have Bulk or V.I.P!
-    (c.) Popup/Timed ad videos costs 190 P-n for beginners with an account of under 3 months, and regular businesspeople pay 200 P-n. In order for GoldRoad U1 to publish any video ad you made to Google Ads or TikTok Ads, that video has gotta meet a minimum certain threshold of 59,000 stars (rating) and 600,000 positive reviews to qualify for a publish, and you have to pay 2,250 P-n for that vid (forget the 1,385 for a bit, few beginner users can publish within 3 months and pass that threshold). If you have subscribed to Bulk and V.I.P, then you just need 30,000 stars and 290,000 positive reviews to publish the video. GoldRoad U1 will then post the video to Google Ads and TikTok Ads (maybe Imma add a possible image ad publishing to LinkedIn, but I'm skeptical about that).
-4. The subscriptions:
-    (a.) U1 Superb = $9.99/month
-    (b.) U1 Bulk = $40.99/month
-    (c.) U1 V.I.P = $129.99/month
-...are the cheapest option to acquiring the Pin-points benefits, because they cost less than what the exchange rate offers, to earn almost 4 times more than what that subscription cost would have bought you (e.g: U1 Superb = $9.99. $9.99 buys you 64.94 P-n but this plan grants you 260 P-n! Remember; if you spent $1 every day for a month on Pin-points (6.5 P-n = $1) hands you 195 P-n. $9.99 buys you 65 P-n and $9.99 multiplied by 3 can buy you the same 195. See that the subscription is the bigger benefit and you earn 4x the P-n?)
+- Authentication
+- U1 ID
+- Role selection
+- User registration and login
+- Email verification
+- Password recovery
+- Payments
+- Pin-points
+- Payment-related frontend logic
+- Media-related platform features
 
-Anyways, that's my simplified monetization workflow, the product servicing monetization is in the previous README file. Now, Token rollover rules for when a user's subscription plan ends while he/she didn't spend all his/her P-n or benefits are:
+### Emmanuel
 
-1. The user has a "grace-period" of 72 hrs to re-pay/continue their subscription plan.
-2. If they do pay/upgrade/downgrade their subscription within that grace period, the system adds them their unspent P-n to their new balance and keeps the benefits they had (if they paid for the same plan), upgrades the benefits they had (if they upgraded their plan) or downgrades the benefits they had (if they downgraded their plan).
-3. If the grace period expires along with the plan, the benefits and remaining Pin-points balance are revoked completely, throwing them back to basic free tier, until they decide whether to get a subscription plan.
+Responsible for:
+
+- Client dashboard
+- Client-side pages
+- Client experience for finding professionals
+- Client-side project and job interaction
+- Client dashboard information and layout
+
+### Remick
+
+Responsible for:
+
+- Freelancer dashboard
+- Freelancer-side pages
+- Freelancer experience for finding available work
+- Freelancer-side project and job interaction
+- Freelancer dashboard information and layout
+
+### Planned Later
+
+These areas are not part of the current assignment:
+
+- Ratings
+- Business dashboard
+- Administrator dashboard
+
+They will be added after the first Client and Freelancer experiences are working.
+
+---
+
+## Team Development Instructions
+
+## 1. Create Your Own Branch
+
+If you forked and cloned the GoldRoad U1 repository, do not work directly on `main`.
+
+Create your own branch before making changes:
+
+```bash
+git checkout -b kipsum/feature-branch
+```
+
+Replace `kipsum/feature-branch` with your own branch name.
+
+For example:
+
+```bash
+git checkout -b emmanuel/client-dashboard
+```
+
+or:
+
+```bash
+git checkout -b remick/freelancer-dashboard
+```
+
+If you only cloned the repository and did not fork it, that is fine too. Create your own branch before coding.
+
+Do not work directly on `main`.
+
+---
+
+## 2. Push Only to Your Own Branch
+
+When you finish a change:
+
+```bash
+git add .
+git commit -m "Your commit message"
+git push origin your-branch-name
+```
+
+Push your work to YOUR custom branch.
+
+Do not push your work directly to `main`.
+
+Once your work is pushed, leave it on your branch.
+
+I will review the work and create the pull request when it is ready.
+
+---
+
+## 3. Frontend Only For Now
+
+For the current development phase, we are ONLY working on the frontend.
+
+Do not work on the backend yet.
+
+The project folders are:
+
+```text
+gold  → Frontend
+teal  → Backend
+```
+
+Our current focus is the `gold` folder.
+
+The `teal` backend will be handled later.
+
+---
+
+## 4. Install Dependencies Before Coding
+
+Before you start coding, run:
+
+```bash
+npm install
+```
+
+This installs the frontend dependencies required by GoldRoad U1.
+
+For backend dependencies, we will use Pipenv later.
+
+If you need to update the backend dependencies or `Pipfile`, use:
+
+```bash
+pipenv install
+pipenv shell
+```
+
+If your Python version is different from the version used when this repository was created, check your version first:
+
+```bash
+python --version
+```
+
+Make sure your Python version matches the version specified in:
+
+```text
+Pipfile
+```
+
+and line 8 of:
+
+```text
+Pipfile.lock
+```
+
+After making the necessary version change, run:
+
+```bash
+pipenv install
+pipenv shell
+```
+
+For now, you should not need to do this because backend development is postponed.
+
+---
+
+## 5. Do Not Ignore Errors
+
+If ANYTHING goes wrong with your code, text me on WhatsApp.
+
+No matter how small or strange the problem is, tell me and wait for me to help you solve it.
+
+This project will have code that breaks.
+
+Errors are part of development, but we cannot ignore them or leave broken code behind.
+
+Do not assume:
+
+> "It probably works."
+
+Check it.
+
+Do not leave an error unresolved just because the rest of your feature appears to work.
+
+If something breaks, message me.
+
+---
+
+## 6. Why We Are Working This Way
+
+Sahii hatuko Moringa, na hatuwezi kukutana physically, so I'm trying my best to organize everyone remotely.
+
+We'll use Google Meet(s) when necessary so that I can make sure everyone understands what they are working on and that:
+
+> "sitaki kuacha mtu nyuma."
+
+Ask questions when you get stuck.
+
+I'd rather you tell me about a problem early than discover it after the code has already been merged.
+
+---
+
+## Current Scope
+
+For the current development phase, prioritize:
+
+1. Frontend structure
+2. Authentication
+3. Client dashboard
+4. Freelancer dashboard
+5. Payments
+6. Integration between these areas
+
+Do not build the unfinished Business, Ratings, or Administrator systems yet.
+
+---
+
+## User Roles
+
+GoldRoad U1 currently has three public account roles:
+
+- Client
+- Freelancer
+- Business
+
+Administrators use the U1 ID system but do not appear as a selectable role on the public role-selection page.
+
+A user starts with one role.
+
+The U1 ID identifies the user and determines their role and permissions.
+
+Role conversion is a permanent account process.
+
+---
+
+## Frontend Structure
+
+```text
+gold/
+├── components/
+│   ├── LottieModal.jsx
+│   ├── ProposalCard.jsx
+│   ├── Skeleton.jsx
+│   ├── LottieAnimation.jsx
+│   ├── Input.jsx
+│   ├── ProjectCard.jsx
+│   ├── ProfileCard.jsx
+│   ├── Sidebar.jsx
+│   ├── Button.jsx
+│   └── Navbar.jsx
+│
+├── context/
+│   └── ThemeContext.jsx
+│
+├── features/
+│   ├── ratings/
+│   ├── payments/
+│   ├── marketplace/
+│   ├── contracts/
+│   ├── workstores/
+│   ├── administration/
+│   ├── support/
+│   ├── subscriptions/
+│   ├── policies/
+│   ├── verification/
+│   ├── proposals/
+│   ├── advertising/
+│   ├── o.m.l.i/
+│   ├── projects/
+│   ├── pin-points/
+│   ├── authentication/
+│   ├── profiles/
+│   ├── account/
+│   ├── notifications/
+│   ├── agencies/
+│   ├── jobs/
+│   └── sage-guide/
+│
+├── hooks/
+├── lib/
+├── layouts/
+├── routes/
+├── services/
+├── stores/
+├── index.css
+├── main.jsx
+└── README.md
+```
+
+Feature folders contain the logic and pages for that feature.
+
+Shared components belong in `components/`.
+
+Global fonts, global styles, theme variables, resets, and browser-wide styles belong in `index.css`.
+
+Page-specific styling belongs inside the JSX file that uses it.
+
+---
+
+## Current Onboarding Flow
+
+```text
+Welcome
+   ↓
+Role Selection
+   ↓
+Authentication
+   ↓
+Dashboard
+```
+
+The Welcome page displays the GoldRoad U1 introduction animation.
+
+The Role Selection page allows the user to choose:
+
+- Client
+- Freelancer
+- Business
+
+There is no Admin option on this page.
+
+---
+
+## Welcome Experience
+
+The current Welcome experience is intentionally minimal.
+
+```text
+Welcome.jsx
+   ↓
+Welcome.json animation
+   ↓
+"Welcome to GoldRoad U1!"
+   ↓
+Role Selection
+```
+
+The Welcome animation is the introductory cinematic experience before the user reaches Role Selection.
+
+The Welcome screen should not be overloaded with navigation, cards, or additional information.
+
+---
+
+## Role Selection
+
+Role Selection is the first interactive public page after the Welcome experience.
+
+It contains:
+
+- Public navigation header
+- Role selection
+- Theme toggle
+- Login entry point
+- Loading skeletons
+- Slide-up content animations
+
+The public header currently belongs specifically to Role Selection.
+
+Authenticated application pages will use sidebars and application navigation instead.
+
+---
+
+## Themes
+
+GoldRoad U1 supports:
+
+- Dark theme
+- Light theme
+
+The theme is managed globally through:
+
+```text
+gold/context/ThemeContext.jsx
+```
+
+Dark theme uses the teal visual glow.
+
+Light theme uses the gold visual glow.
+
+The theme selection is remembered between visits.
+
+The default theme follows the user's system preference unless they have previously selected a theme manually.
+
+---
+
+## Typography
+
+The frontend uses the following fonts:
+
+### Quicksand
+
+Primary interface font.
+
+Used for:
+
+- Navigation
+- Buttons
+- Body text
+- Descriptions
+- Interface labels
+
+### Special Gothic Expanded One
+
+Primary display/title font.
+
+Used mainly for:
+
+- Major headings
+- Page titles
+- Section titles
+- Important display text
+
+### Borel
+
+Expressive handwritten accent font.
+
+Used selectively for:
+
+- Small decorative phrases
+- Brand personality
+- Supporting display accents
+
+Any sentence written in Borel should begin with a capital letter, except when the intentionally lowercase word `here` is being used as part of the design.
+
+### Pixelify Sans
+
+Used selectively for:
+
+- U1-related identity elements
+- Technical or compact status information
+- Small platform-specific accents
+
+Do not use Pixelify Sans for the entire interface.
+
+---
+
+## Navigation
+
+The public onboarding experience currently uses the Role Selection header.
+
+The header contains:
+
+- GoldRoad U1 branding
+- Public navigation
+- Theme toggle
+- Log in
+
+Navigation items may display hover panels where appropriate.
+
+Authenticated users will use the application's sidebar/navigation system instead of the public landing-page navigation.
+
+---
+
+## Loading and Skeletons
+
+Role Selection uses skeleton loading and slide-up animations so the page does not appear instantly after the Welcome experience.
+
+The reusable component is:
+
+```text
+gold/components/Skeleton.jsx
+```
+
+The skeleton system is intended to make asynchronous loading states feel intentional rather than allowing content to appear abruptly.
+
+Do not remove skeleton states simply because the page currently loads quickly during local development.
+
+---
+
+## Shared Components
+
+Shared UI components belong in:
+
+```text
+gold/components/
+```
+
+Examples include:
+
+```text
+Button.jsx
+Input.jsx
+Skeleton.jsx
+Navbar.jsx
+Sidebar.jsx
+LottieAnimation.jsx
+LottieModal.jsx
+```
+
+Do not create duplicate versions of an existing shared component without discussing it first.
+
+If a component is genuinely reusable across multiple feature areas, it belongs in `components/`.
+
+If it is specific to one feature, keep it inside that feature.
+
+---
+
+## Routing
+
+GoldRoad U1 currently uses TanStack Router.
+
+Route files are located in:
+
+```text
+gold/routes/
+```
+
+The generated route tree is:
+
+```text
+gold/routeTree.gen.js
+```
+
+Do not manually edit:
+
+```text
+routeTree.gen.js
+```
+
+Route files should be allowed to generate/update the route tree through the configured TanStack Router tooling.
+
+---
+
+## Policies
+
+Policy documents are currently located under:
+
+```text
+gold/features/policies/
+```
+
+Current policy files include:
+
+```text
+MSA.md
+Ts&Cs.md
+Pn_Purchase_and_Subscription_Policy.md
+SOW.md
+ToS.md
+Privacy_Policy.md
+```
+
+Do not rewrite policy content casually.
+
+Policy changes should be discussed before being made.
+
+---
+
+## Payments
+
+Payments are part of the current development assignment for Ryan.
+
+Current payment-related frontend areas include:
+
+```text
+gold/features/payments/
+gold/features/pin-points/
+gold/features/subscriptions/
+```
+
+Payment secrets and private gateway credentials must never be placed in frontend code.
+
+Do not expose API secrets in JSX, browser storage, Git commits, or public environment variables.
+
+---
+
+## Backend
+
+The backend is located in:
+
+```text
+teal/
+```
+
+Backend development is postponed for the current phase.
+
+The backend will eventually contain:
+
+- API logic
+- Database logic
+- Authentication services
+- Payment services
+- Notifications
+- Marketplace systems
+- Contracts
+- Advertising
+- Administration
+- And other GoldRoad U1 services
+
+For now:
+
+```text
+gold → work here
+teal → leave for later
+```
+
+---
+
+## Git Rules
+
+## Never push directly to `main`
+
+Always create and use your own branch.
+
+Example:
+
+```bash
+git checkout -b emmanuel/client-dashboard
+```
+
+Commit your work:
+
+```bash
+git add .
+git commit -m "Build client dashboard"
+```
+
+Push your branch:
+
+```bash
+git push origin emmanuel/client-dashboard
+```
+
+Then leave the work on your branch.
+
+Do not merge it yourself unless specifically instructed to do so.
+
+---
+
+## Code Quality
+
+Before considering a feature complete:
+
+- Make sure the page works.
+- Check the browser console.
+- Check that there are no obvious runtime errors.
+- Check your buttons and navigation.
+- Test loading states.
+- Test responsive behavior where applicable.
+- Tell Ryan about anything that is broken.
+
+Never knowingly leave an unresolved error in your branch.
+
+---
+
+## Important Rules
+
+Do not:
+
+- Push directly to `main`.
+- Work on the backend during the current frontend phase.
+- Ignore runtime errors.
+- Expose payment secrets.
+- Expose authentication secrets.
+- Manually edit generated `routeTree.gen.js`.
+- Create unnecessary duplicate components.
+- Add new user roles without discussing them with the team.
+- Leave broken code unresolved.
+
+---
+
+## Development Philosophy
+
+GoldRoad U1 is being built by a remote team.
+
+The purpose of our branching and communication rules is to keep everyone moving without leaving anyone behind.
+
+The project will have errors.
+
+The project will have things that break.
+
+The important thing is that we catch them, communicate them, and solve them.
+
+When you are stuck, ask.
+
+When something breaks, report it.
+
+When you finish something, test it.
+
+The goal is not just to write code.
+
+The goal is to build GoldRoad U1 together.
